@@ -1,8 +1,11 @@
 package aop.aspect;
 
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -83,9 +86,22 @@ public class LoggingAspect {
 //    }
 
 
-    @Before("aop.aspect.MyPointCuts.allGetMethods()")
-    public void beforeGetLoggingAdvice() {
-        System.out.println("beforeGetLoggingAdvice: попытка получить книгу/журнал");
+    @Before("aop.aspect.MyPointCuts.allAddMethods()")
+    public void beforeAddLoggingAdvice(JoinPoint joinPoint) {
+
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        System.out.println("signature Method = " + signature.getMethod());
+        System.out.println("------------------------------------------------------------------");
+
+        System.out.println("signature Return Type = " + signature.getReturnType());
+        System.out.println("------------------------------------------------------------------");
+
+        System.out.println("signature Name = " + signature.getName());
+        System.out.println("------------------------------------------------------------------");
+
+
+        System.out.println("beforeAddLoggingAdvice: попытка получить книгу/журнал");
+        System.out.println("------------------------------------------------------------------");
     }
 
 
