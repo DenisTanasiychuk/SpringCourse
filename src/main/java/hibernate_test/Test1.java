@@ -1,5 +1,6 @@
 package hibernate_test;
 
+import aop.Book;
 import hibernate_test.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,17 +17,22 @@ public class Test1 {
         try {
 
 
-        Session session = factory.getCurrentSession();
+            Session session = factory.getCurrentSession();
 
-        Employee employee = new Employee("Denis", "Ivanov", "IT", 100000);
+            Employee employee = new Employee("Alexandr", "Smirnov", "Sale", 70000);
 
-        session.beginTransaction();
+            session.beginTransaction();
 
-        session.save(employee);
+            session.save(employee);
 
-        session.getTransaction().commit();
-        }finally {
+
+            session.getTransaction().commit();
+        } finally {
+
             factory.close();
+
         }
+        System.out.println("Done!");
+
     }
 }
