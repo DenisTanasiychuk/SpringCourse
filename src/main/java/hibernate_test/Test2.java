@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class Test1 {
+public class Test2 {
     public static void main(String[] args) {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -18,19 +18,32 @@ public class Test1 {
 
             Session session = factory.getCurrentSession();
 
-            Employee employee = new Employee("Alexandr", "Smirnov", "Sale", 70000);
+            Employee emp = new Employee("Oleg", "Orginov", "HR", 65000);
 
             session.beginTransaction();
 
-            session.save(employee);
+            session.save(emp);
 
+
+//            session.getTransaction().commit();
+
+            int myId = emp.getId();
+
+//            session = factory.getCurrentSession();
+
+//            session.beginTransaction();
+
+            Employee employee = session.get(Employee.class, myId);
 
             session.getTransaction().commit();
+            System.out.println(employee);
+
         } finally {
 
             factory.close();
 
         }
+
         System.out.println("Done!");
 
     }
